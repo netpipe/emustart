@@ -167,6 +167,15 @@ MainWindow::MainWindow(QWidget *parent)
       mediaPlayer = new QMediaPlayer(this);
       mediaPlayer->setVideoOutput(ui->vidwid);
      // QDir::setCurrent(QStringLiteral("./snes/"));
+
+      QDirIterator it("./roms", QDir::AllDirs | QDir::NoDotAndDotDot);
+      while (it.hasNext()) {
+          qDebug() << it.next();
+ui->emulist->addItem(resolveRelativePath(it.filePath())+"/");
+      }
+
+     // resolveRelativePath(
+
 }
 
 MainWindow::~MainWindow()
@@ -190,10 +199,11 @@ void MainWindow::on_runbtn_clicked()
 
 void MainWindow::on_runbtn_2_clicked()
 {
+
    // loadGameData();
     Game gameslist = parseXML (ui->pathtxt_2->text(),1);
     //qDebug() << "testing" << gameslist.video ;
-   // playVideo (gameslist.video);
+    //playVideo (gameslist.video);
     playVideo (resolveRelativePath(gameslist.video));
 }
 
