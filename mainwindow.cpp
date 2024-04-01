@@ -201,7 +201,7 @@ void MainWindow::on_runbtn_2_clicked()
 {
 
    // loadGameData();
-    Game gameslist = parseXML (ui->pathtxt_2->text(),1);
+    Game gameslist = parseXML (ui->emulist->currentText()+"gamelist.xml",1);
     //qDebug() << "testing" << gameslist.video ;
     //playVideo (gameslist.video);
     playVideo (resolveRelativePath(gameslist.video));
