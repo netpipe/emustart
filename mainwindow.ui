@@ -116,8 +116,8 @@
        <widget class="QComboBox" name="emulist">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>30</y>
+          <x>0</x>
+          <y>20</y>
           <width>361</width>
           <height>26</height>
          </rect>

@@ -9,7 +9,7 @@
 
 QString resolveRelativePath(const QString &relativePath) {
     // Base directory where the files are located
-    QString baseDirectory = QDir::currentPath();//  "/home/Desktop/test/snes/";
+    QString baseDirectory = QDir::currentPath()+"/roms/superconsole/";//  "/home/Desktop/test/snes/";
     // Remove leading "./" if present
     QString cleanedPath = relativePath;
     if (cleanedPath.startsWith("./")) {
@@ -168,10 +168,10 @@ MainWindow::MainWindow(QWidget *parent)
       mediaPlayer->setVideoOutput(ui->vidwid);
      // QDir::setCurrent(QStringLiteral("./snes/"));
 
-      QDirIterator it("./roms", QDir::AllDirs | QDir::NoDotAndDotDot);
+      QDirIterator it("roms", QDir::AllDirs | QDir::NoDotAndDotDot);
       while (it.hasNext()) {
           qDebug() << it.next();
-ui->emulist->addItem(resolveRelativePath(it.filePath())+"/");
+ui->emulist->addItem(it.filePath());
       }
 
      // resolveRelativePath(
@@ -201,7 +201,8 @@ void MainWindow::on_runbtn_2_clicked()
 {
 
    // loadGameData();
-    Game gameslist = parseXML (ui->emulist->currentText()+"gamelist.xml",1);
+    qDebug() << ui->emulist->currentText()+"/gamelist.xml";
+    Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",1);
     //qDebug() << "testing" << gameslist.video ;
     //playVideo (gameslist.video);
     playVideo (resolveRelativePath(gameslist.video));
