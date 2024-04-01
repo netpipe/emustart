@@ -18,13 +18,13 @@
 		<path>./Metal.7z</path>
 		<name>Metal</name>
 		<desc>the events </desc>
-		<image>./images/Metal-image.png</image>
+		<image>./images/test-image.png</image>
 		<video>./videos/test-video.webm</video>
-		<marquee>./images/Metal-marquee.png</marquee>
-		<thumbnail>./images/Metal-thumb.png</thumbnail>
-		<manual>./manuals/Metal-manual.pdf</manual>
-		<bezel>./images/Metal-bezel.png</bezel>
-		<boxback>./images/Metal-boxback.png</boxback>
+		<marquee>./images/test-marquee.png</marquee>
+		<thumbnail>./images/test-thumb.png</thumbnail>
+		<manual>./manuals/test-manual.pdf</manual>
+		<bezel>./images/test-bezel.png</bezel>
+		<boxback>./images/test-boxback.png</boxback>
 		<rating>0.8</rating>
 		<releasedate>1900</releasedate>
 		<developer>Inms</developer>
