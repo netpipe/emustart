@@ -113,6 +113,16 @@
          <string>play</string>
         </property>
        </widget>
+       <widget class="QComboBox" name="emulist">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>361</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
