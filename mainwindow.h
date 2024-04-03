@@ -19,6 +19,7 @@ struct Game {
     QString publisher;
     QString genre;
     QString players;
+    int gamecount;
 };
 
 QT_BEGIN_NAMESPACE
@@ -35,8 +36,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    Game parseXML(const QString &filePath,int);
-    void loadGameData();
+    Game parseXML(const QString &filePath,int,bool);
+    void loadGameData(QString);
     void displayGameInfo(int index);
     void playVideo(const QString &videoPath);
     void displayImage(const QString &imagePath);

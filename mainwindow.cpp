@@ -28,7 +28,7 @@ QListWidgetItem* createGameItem(const QString &title, const QString &imagePath) 
     return item;
 }
 
-Game MainWindow::parseXML(const QString &filePath, int index) {
+Game MainWindow::parseXML(const QString &filePath, int index,bool countenable) {
     Game game;
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -43,45 +43,47 @@ Game MainWindow::parseXML(const QString &filePath, int index) {
         QXmlStreamReader::TokenType token = xmlReader.readNext();
 
         if (token == QXmlStreamReader::StartElement) {
-            if (xmlReader.name() == "game") {
+            if (xmlReader.name() == QString("game")) {
                 ++currentIndex;
+                game.gamecount=currentIndex;
+                if (!countenable){
                 if (currentIndex == index) {
-                    while (!(xmlReader.tokenType() == QXmlStreamReader::EndElement && xmlReader.name() == "game")) {
+                    while (!(xmlReader.tokenType() == QXmlStreamReader::EndElement && xmlReader.name() == QString("game"))) {
                         if (xmlReader.tokenType() == QXmlStreamReader::StartElement) {
-                            if (xmlReader.name() == "path") {
+                            if (xmlReader.name() ==  QString("path")) {
                                 xmlReader.readNext();
                                 game.path = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "name") {
+                            } else if (xmlReader.name() ==  QString("name")) {
                                 xmlReader.readNext();
                                 game.name = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "desc") {
+                            } else if (xmlReader.name() ==  QString("desc")) {
                                 xmlReader.readNext();
                                 game.desc = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "image") {
+                            } else if (xmlReader.name() ==  QString("image")) {
                                 xmlReader.readNext();
                                 game.image = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "video") {
+                            } else if (xmlReader.name() ==  QString("video")) {
                                 xmlReader.readNext();
                                 game.video = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "marquee") {
+                            } else if (xmlReader.name() ==  QString("marquee")) {
                                 xmlReader.readNext();
                                 game.marquee = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "thumbnail") {
+                            } else if (xmlReader.name() ==  QString("thumbnail")) {
                                 xmlReader.readNext();
                                 game.thumbnail = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "releasedate") {
+                            } else if (xmlReader.name() ==  QString("releasedate")) {
                                 xmlReader.readNext();
                                 game.releasedate = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "developer") {
+                            } else if (xmlReader.name() ==  QString("developer")) {
                                 xmlReader.readNext();
                                 game.developer = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "publisher") {
+                            } else if (xmlReader.name() ==  QString("publisher")) {
                                 xmlReader.readNext();
                                 game.publisher = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "genre") {
+                            } else if (xmlReader.name() ==  QString("genre")) {
                                 xmlReader.readNext();
                                 game.genre = xmlReader.text().toString();
-                            } else if (xmlReader.name() == "players") {
+                            } else if (xmlReader.name() ==  QString("players")) {
                                 xmlReader.readNext();
                                 game.players = xmlReader.text().toString();
                             }
@@ -93,12 +95,13 @@ Game MainWindow::parseXML(const QString &filePath, int index) {
                     file.close();
                     return game; // Return immediately when the game is found
                 }
+                }
             }
         }
     }
 
     file.close();
-    qDebug() << "Game not found at index" << index;
+   // qDebug() << "Game not found at index" << index;
     return game; // Return empty game if not found
 }
 
@@ -136,9 +139,19 @@ Game MainWindow::parseXML(const QString &filePath, int index) {
 //        }
 //    }
 //}
-void MainWindow::loadGameData() {
-    QString filePath = "gamelist.xml"; // Path to your XML file
-    parseXML(filePath,1);
+void MainWindow::loadGameData(QString filePath) {
+   // QString filePath = test.toLatin1(); // Path to your XML file
+    Game gameslist =  parseXML(filePath,1,1);
+    qDebug() << "gamecount " << gameslist.gamecount+1 << endl;
+    qDebug() << "testing " << endl;
+    int i=0;
+    Game gameslist2;
+    while(i<=gameslist.gamecount){
+        gameslist2 = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",i,0);
+        ui->gamelistwidget->addItem(gameslist2.name);
+        i++;
+    }
+    //append games to list
 }
 
 
@@ -149,8 +162,8 @@ void MainWindow::displayGameInfo(int index) {
 }
 
 void MainWindow::playVideo(const QString &videoPath) {
-    mediaPlayer->setMedia(QUrl::fromLocalFile(videoPath));
-    mediaPlayer->play();
+    //mediaPlayer->setMedia(QUrl::fromLocalFile(videoPath));
+    //mediaPlayer->play();
 }
 
 void MainWindow::displayImage(const QString &imagePath) {
@@ -201,10 +214,14 @@ void MainWindow::on_runbtn_2_clicked()
 {
 
    // loadGameData();
-    qDebug() << ui->emulist->currentText()+"/gamelist.xml";
-    Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",1);
+    //qDebug() << ui->emulist->currentText()+"/gamelist.xml";
+    Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",1,0);
     //qDebug() << "testing" << gameslist.video ;
     //playVideo (gameslist.video);
+    qDebug() << resolveRelativePath(gameslist.image);
+ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image)));
     playVideo (resolveRelativePath(gameslist.video));
+
+    loadGameData(ui->emulist->currentText()+"/gamelist.xml");
 }
 

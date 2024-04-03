@@ -123,6 +123,28 @@
          </rect>
         </property>
        </widget>
+       <widget class="QLabel" name="boximage">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>320</y>
+          <width>201</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">

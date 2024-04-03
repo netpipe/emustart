@@ -1,24 +1,54 @@
 <?xml version="1.0"?>
 <gameList>
-	<game>
-		<path>./Kong.smc</path>
-		<name>Classic</name>
-		<desc>W!</desc>
-		<image>./images/Kong-image.png</image>
-		<video>./videos/Kong-video.mp4</video>
-		<marquee>./images/Kong-marquee.png</marquee>
-		<thumbnail>./images/Kong-thumb.png</thumbnail>
-		<releasedate>20120101T000000</releasedate>
-		<developer>test</developer>
-		<publisher>test Games</publisher>
-		<genre>Action</genre>
-		<players>1-2</players>
-	</game>
-	<game id="273">
+	<game id="3273">
 		<path>./Metal.7z</path>
 		<name>Metal</name>
 		<desc>the events </desc>
-		<image>./images/test-image.png</image>
+		<image>./images/test -image.png</image>
+		<video>./videos/test-video.webm</video>
+		<marquee>./images/test-marquee.png</marquee>
+		<thumbnail>./images/test-thumb.png</thumbnail>
+		<manual>./manuals/test-manual.pdf</manual>
+		<bezel>./images/test-bezel.png</bezel>
+		<boxback>./images/test-boxback.png</boxback>
+		<rating>0.8</rating>
+		<releasedate>1900</releasedate>
+		<developer>Inms</developer>
+		<publisher>someone</publisher>
+		<genre>Lightgun Shooter</genre>
+		<players>1-2</players>
+		<md5>1e</md5>
+		<lang>en</lang>
+		<region>us</region>
+		<scrap name="ScreenScraper" date="" />
+	</game>
+		<game id="2373">
+		<path>./Metal.7z</path>
+		<name>Metal</name>
+		<desc>the events </desc>
+		<image>./images/test -image.png</image>
+		<video>./videos/test-video.webm</video>
+		<marquee>./images/test-marquee.png</marquee>
+		<thumbnail>./images/test-thumb.png</thumbnail>
+		<manual>./manuals/test-manual.pdf</manual>
+		<bezel>./images/test-bezel.png</bezel>
+		<boxback>./images/test-boxback.png</boxback>
+		<rating>0.8</rating>
+		<releasedate>1900</releasedate>
+		<developer>Inms</developer>
+		<publisher>someone</publisher>
+		<genre>Lightgun Shooter</genre>
+		<players>1-2</players>
+		<md5>1e</md5>
+		<lang>en</lang>
+		<region>us</region>
+		<scrap name="ScreenScraper" date="" />
+	</game>
+		<game id="2733">
+		<path>./Metal.7z</path>
+		<name>Metal</name>
+		<desc>the events </desc>
+		<image>./images/test -image.png</image>
 		<video>./videos/test-video.webm</video>
 		<marquee>./images/test-marquee.png</marquee>
 		<thumbnail>./images/test-thumb.png</thumbnail>
