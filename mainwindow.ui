@@ -25,7 +25,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -166,11 +166,11 @@
             </rect>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="addemu">
            <property name="geometry">
             <rect>
-             <x>330</x>
-             <y>360</y>
+             <x>340</x>
+             <y>90</y>
              <width>80</width>
              <height>26</height>
             </rect>
@@ -274,8 +274,8 @@
           <widget class="QLabel" name="label_5">
            <property name="geometry">
             <rect>
-             <x>150</x>
-             <y>240</y>
+             <x>40</x>
+             <y>230</y>
              <width>58</width>
              <height>18</height>
             </rect>
@@ -287,8 +287,8 @@
           <widget class="QLineEdit" name="lineEdit_5">
            <property name="geometry">
             <rect>
-             <x>240</x>
-             <y>240</y>
+             <x>130</x>
+             <y>230</y>
              <width>113</width>
              <height>26</height>
             </rect>
@@ -297,17 +297,37 @@
             <string/>
            </property>
           </widget>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="removeemu">
            <property name="geometry">
             <rect>
-             <x>340</x>
-             <y>390</y>
+             <x>430</x>
+             <y>90</y>
              <width>80</width>
              <height>26</height>
             </rect>
            </property>
            <property name="text">
             <string>remove</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="nameEdit">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>40</y>
+             <width>113</width>
+             <height>26</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="pathEdit">
+           <property name="geometry">
+            <rect>
+             <x>490</x>
+             <y>40</y>
+             <width>191</width>
+             <height>26</height>
+            </rect>
            </property>
           </widget>
          </widget>

@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QProcess>
-
+#include <QListWidgetItem>
+#include <QSqlDatabase>
 
 struct Game {
     QString path;
@@ -42,14 +43,27 @@ public:
     void displayGameInfo(int index);
     void playVideo(const QString &videoPath);
     void displayImage(const QString &imagePath);
+
+    void updateEntry();
+    void loadSelectedApplication(QListWidgetItem*);
+    void initializeDatabase();
+     void loadApplications();
+
 private slots:
     void on_runbtn_clicked();
 
     void on_runbtn_2_clicked();
 
+    void on_addemu_clicked();
+
+    void on_removeemu_clicked();
+
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer *mediaPlayer;
     QProcess *m_process;
+        QSqlDatabase m_database;
 };
 #endif // MAINWINDOW_H

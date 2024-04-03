@@ -4,7 +4,7 @@
 #include <QtXml>
 #include <QDebug>
 #include <QXmlStreamReader>
-
+#include <QSqlQuery>
 
 
 QString resolveRelativePath(const QString &relativePath) {
@@ -188,7 +188,7 @@ MainWindow::MainWindow(QWidget *parent)
           qDebug() << it.next();
 ui->emulist->addItem(it.filePath());
       }
-
+initializeDatabase();
      // resolveRelativePath(
 
 }
@@ -225,5 +225,99 @@ ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image)));
     playVideo (resolveRelativePath(gameslist.video));
 
     loadGameData(ui->emulist->currentText()+"/gamelist.xml");
+}
+
+
+
+
+
+void MainWindow::on_addemu_clicked(){
+    QString name = ui->nameEdit->text();
+    QString path = ui->pathEdit->text();
+
+    if (!name.isEmpty() && !path.isEmpty()) {
+        QSqlQuery query;
+        query.prepare("INSERT INTO applications (name, path) VALUES (?, ?)");
+        query.addBindValue(name);
+        query.addBindValue(path);
+        query.exec();
+
+        loadApplications();
+        ui->nameEdit->clear();
+        ui->pathEdit->clear();
+    }
+}
+
+void MainWindow::on_removeemu_clicked(){
+    QListWidgetItem *item = ui->listWidget->currentItem();
+    if (item) {
+        QString name = item->text();
+        QSqlQuery query;
+        query.prepare("DELETE FROM applications WHERE name = ?");
+        query.addBindValue(name);
+        query.exec();
+
+        loadApplications();
+    }
+}
+
+void MainWindow::updateEntry() {
+    QListWidgetItem *item = ui->listWidget->currentItem();
+    if (item) {
+        QString name = item->text();
+        QString newName = ui->nameEdit->text();
+        QString newPath = ui->pathEdit->text();
+
+        QSqlQuery query;
+        query.prepare("UPDATE applications SET name = ?, path = ? WHERE name = ?");
+        query.addBindValue(newName);
+        query.addBindValue(newPath);
+        query.addBindValue(name);
+        query.exec();
+
+        loadApplications();
+        ui->nameEdit->clear();
+        ui->pathEdit->clear();
+    }
+}
+
+void MainWindow::initializeDatabase() {
+    m_database = QSqlDatabase::addDatabase("QSQLITE");
+    m_database.setDatabaseName("applications.db");
+
+    if (!m_database.open()) {
+    //    qDebug() << "Error: Failed to open database:" << m_database.lastError();
+    }
+
+    QSqlQuery query;
+    query.exec("CREATE TABLE IF NOT EXISTS applications (name TEXT, path TEXT)");
+}
+void MainWindow::loadApplications() {
+    ui->listWidget->clear();
+    QSqlQuery query("SELECT * FROM applications", m_database);
+    while (query.next()) {
+        QString name = query.value(0).toString();
+        ui->listWidget->addItem(name);
+    }
+}
+
+
+
+
+void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    if (item) {
+        QString name = item->text();
+        QSqlQuery query;
+        query.prepare("SELECT path FROM applications WHERE name = ?");
+        query.addBindValue(name);
+        query.exec();
+
+        if (query.next()) {
+            QString path = query.value(0).toString();
+            ui->nameEdit->setText(name);
+            ui->pathEdit->setText(path);
+        }
+    }
 }
 
