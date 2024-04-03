@@ -189,6 +189,7 @@ MainWindow::MainWindow(QWidget *parent)
 ui->emulist->addItem(it.filePath());
       }
 initializeDatabase();
+loadApplications();
      // resolveRelativePath(
 
 }
@@ -302,9 +303,7 @@ void MainWindow::loadApplications() {
 }
 
 
-
-
-void MainWindow::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 {
     if (item) {
         QString name = item->text();
