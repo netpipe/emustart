@@ -149,9 +149,11 @@ void MainWindow::loadGameData(QString filePath) {
     while(i<=gameslist.gamecount){
         gameslist2 = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",i,0);
         ui->gamelistwidget->addItem(gameslist2.name);
+     //   stuff << gameslist2.name;
         i++;
     }
     //append games to list
+   // qDebug() << stuff.at(1);
 }
 
 

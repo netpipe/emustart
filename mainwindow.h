@@ -36,6 +36,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QStringList stuff;
     Game parseXML(const QString &filePath,int,bool);
     void loadGameData(QString);
     void displayGameInfo(int index);
