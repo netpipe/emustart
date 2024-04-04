@@ -164,8 +164,8 @@ void MainWindow::displayGameInfo(int index) {
 }
 
 void MainWindow::playVideo(const QString &videoPath) {
-    //mediaPlayer->setMedia(QUrl::fromLocalFile(videoPath));
-    //mediaPlayer->play();
+    mediaPlayer->setMedia(QUrl::fromLocalFile(videoPath));
+    mediaPlayer->play();
 }
 
 void MainWindow::displayImage(const QString &imagePath) {
@@ -321,12 +321,6 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 }
 
 
-void MainWindow::on_gamelistwidget_itemClicked(QListWidgetItem *item)
-{
-
-}
-
-
 void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
 {
         Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",currentRow,0);
@@ -345,5 +339,9 @@ void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
                 ui->pathtxt->setText(path + " " + resolveRelativePath(gameslist.path));
                 //qDebug() << path << endl;
             }
+
+            qDebug() << "setting and playing video" <<resolveRelativePath(gameslist.video)<< endl;
+        ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image)));
+            playVideo (resolveRelativePath(gameslist.video));
 }
 

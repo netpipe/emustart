@@ -62,8 +62,6 @@ private slots:
 
     void on_updatebtn_clicked();
 
-    void on_gamelistwidget_itemClicked(QListWidgetItem *item);
-
     void on_gamelistwidget_currentRowChanged(int currentRow);
 
 private:
