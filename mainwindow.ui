@@ -25,7 +25,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -272,6 +272,29 @@
            </property>
            <property name="text">
             <string>path</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>330</y>
+             <width>113</width>
+             <height>26</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_3">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>330</y>
+             <width>101</width>
+             <height>18</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>romextension</string>
            </property>
           </widget>
          </widget>
