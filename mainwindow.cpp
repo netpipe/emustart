@@ -7,9 +7,9 @@
 #include <QSqlQuery>
 
 
-QString resolveRelativePath(const QString &relativePath) {
+QString resolveRelativePath(const QString &relativePath,QString console) {
     // Base directory where the files are located
-    QString baseDirectory = QDir::currentPath()+"/roms/superconsole/";//  "/home/Desktop/test/snes/";
+    QString baseDirectory = QDir::currentPath()+"/roms/" + console + "/";//  "/home/Desktop/test/snes/";
     // Remove leading "./" if present
     QString cleanedPath = relativePath;
     if (cleanedPath.startsWith("./")) {
@@ -221,9 +221,13 @@ void MainWindow::on_runbtn_2_clicked()
     Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",1,0);
     //qDebug() << "testing" << gameslist.video ;
     //playVideo (gameslist.video);
-    qDebug() << resolveRelativePath(gameslist.image);
-ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image)));
-    playVideo (resolveRelativePath(gameslist.video));
+    QStringList list=  ui->emulist->currentText().split("/");
+        QString name = list.at(1).toLatin1(); //item->text();
+
+
+    qDebug() << resolveRelativePath(gameslist.image,name);
+ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image,name)));
+    playVideo (resolveRelativePath(gameslist.video,name));
 
     loadGameData(ui->emulist->currentText()+"/gamelist.xml");
 }
@@ -324,7 +328,7 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
 void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
 {
         Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",currentRow,0);
-        QStringList list=  ui->emulist->currentText().split("/");;
+        QStringList list=  ui->emulist->currentText().split("/");
         //qDebug() << list.at(1).toLatin1();
 
 
@@ -336,12 +340,12 @@ void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
 
             if (query.next()) {
                 QString path = query.value(0).toString();
-                ui->pathtxt->setText(path + " " + resolveRelativePath(gameslist.path));
+                ui->pathtxt->setText(path + " " + '"'+ resolveRelativePath(gameslist.path,name)+'"');
                 //qDebug() << path << endl;
             }
 
-            qDebug() << "setting and playing video" <<resolveRelativePath(gameslist.video)<< endl;
-        ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image)));
-            playVideo (resolveRelativePath(gameslist.video));
+        //    qDebug() << "setting and playing video" <<resolveRelativePath(gameslist.video,name)<< endl;
+        ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image,name)));
+            playVideo (resolveRelativePath(gameslist.video,name));
 }
 
