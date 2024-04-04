@@ -37,14 +37,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QString gamefile;
+
     QStringList stuff;
     Game parseXML(const QString &filePath,int,bool);
     void loadGameData(QString);
     void displayGameInfo(int index);
     void playVideo(const QString &videoPath);
     void displayImage(const QString &imagePath);
-
-    void updateEntry();
     void loadSelectedApplication(QListWidgetItem*);
     void initializeDatabase();
      void loadApplications();
@@ -58,7 +58,13 @@ private slots:
 
     void on_removeemu_clicked();
 
-    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
+    void on_updatebtn_clicked();
+
+    void on_gamelistwidget_itemClicked(QListWidgetItem *item);
+
+    void on_gamelistwidget_currentRowChanged(int currentRow);
 
 private:
     Ui::MainWindow *ui;

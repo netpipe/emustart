@@ -262,7 +262,7 @@ void MainWindow::on_removeemu_clicked(){
     }
 }
 
-void MainWindow::updateEntry() {
+void MainWindow::on_updatebtn_clicked() {
     QListWidgetItem *item = ui->listWidget->currentItem();
     if (item) {
         QString name = item->text();
@@ -318,5 +318,35 @@ void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
             ui->pathEdit->setText(path);
         }
     }
+}
+
+
+void MainWindow::on_gamelistwidget_itemClicked(QListWidgetItem *item)
+{
+
+}
+
+
+void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
+{
+        Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",currentRow,0);
+
+        //ui->emulist->currentText() //split path and get emulator name
+
+        //load emulatorfolder from sql name
+        if (item) {
+            QString name = item->text();
+            QSqlQuery query;
+            query.prepare("SELECT path FROM applications WHERE name = ?");
+            query.addBindValue(name);
+            query.exec();
+
+            if (query.next()) {
+                QString path = query.value(0).toString();
+                ui->nameEdit->setText(name);
+                ui->pathEdit->setText(path);
+            }
+        }
+        qDebug() << gameslist.path << endl;
 }
 
