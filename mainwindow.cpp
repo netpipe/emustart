@@ -330,9 +330,24 @@ void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
         Game gameslist = parseXML ("./"+ui->emulist->currentText()+"/gamelist.xml",currentRow,0);
         QStringList list=  ui->emulist->currentText().split("/");
         //qDebug() << list.at(1).toLatin1();
-
-
             QString name = list.at(1).toLatin1(); //item->text();
+
+            //if console extractfiles first
+ if(false){
+            QProcess* m_process = new QProcess();
+            QStringList list3;
+            list3 << "-o"+ui->emulist->currentText() << "x" << resolveRelativePath(gameslist.path,name);
+            m_process->startDetached("7z", list3); // startDetached is fine for your needs
+}
+              QStringList removetrail=  resolveRelativePath(gameslist.path,name).split("/");
+       //     qDebug() <<
+            //            QStringlist << removetrail.at(removetrail.count()-1);
+              removetrail.at(removetrail.count()-1);
+              QString newname;
+              for    (int i;i<removetrail.count(),i++;){
+//              if (cleanedPath.startsWith("./")) {
+//                  cleanedPath.remove(0, 2);
+              }
             QSqlQuery query;
             query.prepare("SELECT path FROM applications WHERE name = ?");
             query.addBindValue(name);
@@ -344,8 +359,15 @@ void MainWindow::on_gamelistwidget_currentRowChanged(int currentRow)
                 //qDebug() << path << endl;
             }
 
+
+
         //    qDebug() << "setting and playing video" <<resolveRelativePath(gameslist.video,name)<< endl;
         ui->boximage->setPixmap(QPixmap(resolveRelativePath(gameslist.image,name)));
             playVideo (resolveRelativePath(gameslist.video,name));
+
+
+
+
+
 }
 
